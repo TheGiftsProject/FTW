@@ -1,0 +1,17 @@
+defaults: &defaults
+  adapter: mysql2
+  username:
+  password:
+  encoding: utf8
+
+production:
+  database: ftw
+  <<: *defaults
+
+development:
+  database: ftw
+  <<: *defaults
+
+test:
+  database: ftw
+  <<: *defaults
