@@ -10,4 +10,5 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'pivotal-tracker'
 gem 'ruby-debug19', :require => 'ruby-debug'
