@@ -2,6 +2,7 @@ function Character(world, x, y) {
     this.x = x || 0;
     this.y = y || 0;
     this.vel = Direction.NONE;
+    this.lastDir = Direction.BOT;
     this.world = world;
     this.orders = [];
     this.working = false;
@@ -73,6 +74,7 @@ Order.prototype.performMoveOrder = function(character) {
     }
     // reached destination.
     else {
+        character.lastDir = character.vel;
         character.vel = Direction.NONE;
         character.orders.splice(0, 1);
     }

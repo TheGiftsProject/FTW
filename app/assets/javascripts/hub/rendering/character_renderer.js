@@ -26,7 +26,14 @@ CharacterRenderer.prototype.renderCharacter = function(character) {
                 case Direction.BOTTOM: this.renderer.pixelBlit(0, animation_offset, character.x, character.y); break;
             }
         }
-        else this.renderer.pixelBlit(0, 0, character.x, character.y);
+        else {
+            switch (character.lastDir) {
+                case Direction.LEFT:   this.renderer.pixelBlit(3, 0, character.x, character.y); break;
+                case Direction.RIGHT:  this.renderer.pixelBlit(2, 0, character.x, character.y); break;
+                case Direction.TOP:    this.renderer.pixelBlit(1, 0, character.x, character.y); break;
+                case Direction.BOTTOM: this.renderer.pixelBlit(0, 0, character.x, character.y); break;
+            }
+        }
     }
 };
 
