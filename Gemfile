@@ -21,3 +21,9 @@ gem "enumify"
 group :development, :test do
   gem 'rspec-rails'
 end
+
+group :development, :test do
+  gem 'hirb'
+  gem 'awesome_print'
+  gem 'wirble' #IRB colors
+end
