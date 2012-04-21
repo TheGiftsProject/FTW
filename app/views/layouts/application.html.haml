@@ -8,9 +8,26 @@
 
     != csrf_meta_tag
   %body
-    %h1 FTW
-    %h2 An RPG/Project Management hybrid.<br> Quest through tasks, kill the bugs, get loot - woot.
-    - flash.each do |key,val|
-      .flash{:class => key}
-        != val
-    != yield
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.btn.btn-navbar{data: {toggle: "collapse", target: ".nav-collapse"}}
+            .icon-bar
+            .icon-bar
+            .icon-bar
+          %a.brand FTW
+          .nav-collapse
+            %ul.nav
+              %li
+                %a.active Home
+              %li
+                %a{href: "about"} About
+              %li
+                %a{href: "concat"} Contact
+    .container
+      %h1 FTW
+      %h2 An RPG/Project Management hybrid.<br> Quest through tasks, kill the bugs, get loot - woot.
+      - flash.each do |key,val|
+        .flash{:class => key}
+          != val
+      != yield
