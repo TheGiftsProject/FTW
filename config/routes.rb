@@ -5,6 +5,7 @@ FTW::Application.routes.draw do
 
   match "dashboard" => "pages#dashboard", :as => "dashboard"
   match "debug" => "pages#debug", :as => "debug"
-  root :to => 'pages#landing'
+  match "logout" => "pages#logout", :as => :logout
+  root :to => 'pages#landing', :as => :landing
 
 end
