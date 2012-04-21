@@ -24,6 +24,10 @@ class API::PivotalQuest
     @pivotal_story.estimate
   end
 
+  def bug?
+    @pivotal_story.story_type == "bug"
+  end
+
   def start!
     @pivotal_story.update(:current_state => "started")
   end
