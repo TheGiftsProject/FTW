@@ -1,3 +1,5 @@
+//= require_tree .
+
 function Hub(canvas, targetFPS) {
     this.ctx = canvas.getContext("2d");
     this.ctxWidth = canvas.width;
