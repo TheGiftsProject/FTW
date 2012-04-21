@@ -15,4 +15,5 @@
 /tmp
 .idea
 config/database.yml
+config/pivotal.yml
 .rvmrc

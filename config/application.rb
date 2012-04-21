@@ -59,5 +59,7 @@ module FTW
     # Adds lib folder to auto loading paths.
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/*"]
+
+    PIVOTAL = YAML.load_file("#{Rails.root}/config/pivotal.yml")
   end
 end

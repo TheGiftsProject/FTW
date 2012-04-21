@@ -1,13 +1,19 @@
-class API::Pivotal::Campaign
+module API
+  class PivotalCampaign
 
-  include PivotalTracker
+    include PivotalTracker
 
-  def initialize(pivotal_project)
-    @pivotal_project = pivotal_project
+    def initialize(pivotal_project)
+      @pivotal_project = pivotal_project
+    end
+
+    def name
+      @pivotal_project.name
+    end
+
+    def quest(id)
+      @pivotal_project.stories.find(id)
+    end
+
   end
-
-  def quest(id)
-    # wrap pivotal story in a quest object
-  end
-
 end
