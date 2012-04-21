@@ -55,7 +55,7 @@ Character.prototype.stopWorking = function() {
 };
 
 Character.prototype.goToBulletin = function() {
-    if (this.state === Character.STATE_IDLE) {
+    if (this.state === Character.STATE_IDLE || this.state === Character.STATE_DANCING) {
         this.orders.push(new Order(Order.MOVE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24));
         this.orders.push(new Order(Order.LOOK_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.TOP));
     }
@@ -158,7 +158,7 @@ Order.prototype.performFaceOrder = function(character) {
 }
 
 Order.prototype.performDanceOrder = function(character) {
-    character.state = Character.STATE_DANCE;
+    character.state = Character.STATE_DANCING;
     character.completeOrder();
 }
 
