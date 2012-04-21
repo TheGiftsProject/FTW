@@ -24,6 +24,11 @@ Character.prototype.isMoving = function() {
     return this.vel != Direction.NONE;
 };
 
+Character.prototype.completeOrder = function() {
+   this.orders.splice(0, 1);
+}
+
+// "API"
 Character.prototype.goWork = function() {
     var emptyStation = this.world.getEmptyStation();
     this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
@@ -35,6 +40,12 @@ Character.prototype.stopWorking = function() {
         this.orders.push(new Order(Order.STOP_ORDER));
         this.orders.push(new Order(Order.MOVE_ORDER, this.workingAt.x, this.workingAt.y + 48));
     }
+}
+
+Character.prototype.goToBulletin = function() {
+    var emptyStation = this.world.getEmptyStation();
+    this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
+    this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
 }
 
 //========================== ORDERS =============================/
@@ -85,18 +96,20 @@ Order.prototype.performMoveOrder = function(character) {
     else {
         character.lastDir = character.vel;
         character.vel = Direction.NONE;
-        character.orders.splice(0, 1);
+        character.completeOrder();
     }
 };
 
 Order.prototype.performWorkOrder = function(character) {
     character.workingAt = this.destObject;
     this.destObject.occupy(character);
+    character.completeOrder();
 };
 
 Order.prototype.performStopOrder = function(character) {
     this.destObject.unoccupy();
     character.workingAt = null;
+    character.completeOrder();
 }
 
 //========================== DIRECTION =============================/

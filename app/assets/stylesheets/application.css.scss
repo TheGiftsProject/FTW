@@ -8,7 +8,10 @@
 body { padding-top: 60px} /* Must be between bootstrap and bootstrap-responsive */
 
 @import "bootstrap-responsive";
+
+/* System Pages */
 @import "pages/landing.css.scss";
+@import "pages/dashboard.css.scss";
 
 
 body {

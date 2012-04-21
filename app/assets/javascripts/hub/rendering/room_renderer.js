@@ -1,5 +1,6 @@
 function RoomRenderer(renderer, world) {
     this.renderer = renderer;
+    this.world = world;
 };
 
 RoomRenderer.prototype.render = function() {
@@ -15,6 +16,7 @@ RoomRenderer.prototype.render = function() {
     this.renderDoor();
     this.renderLeftTorches();
     this.renderRightTorches();
+    this.renderBulletin();
 };
 
 // corners.
@@ -82,4 +84,8 @@ RoomRenderer.prototype.renderRightTorches = function() {
     for (var row = 1; row < this.renderer.rows - 1; row++) {
         if (row % 2 == 0) this.renderer.tileBlit(4, 4, this.renderer.cols - 1, row);
     }
+};
+
+RoomRenderer.prototype.renderBulletin = function() {
+    this.renderer.pixelBlit(6, 3, this.world.bulletin.x, this.world.bulletin.y);
 };

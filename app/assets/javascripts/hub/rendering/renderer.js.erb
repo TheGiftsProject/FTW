@@ -6,7 +6,7 @@ function Renderer(ctx, world) {
     this.world = world;
     this.cols = world.width / Renderer.TILE_SIZE;
     this.rows = world.height / Renderer.TILE_SIZE;
-    this.roomRenderer = new RoomRenderer(this);
+    this.roomRenderer = new RoomRenderer(this, world);
     this.characterRenderer = new CharacterRenderer(this, world);
     this.stationRenderer = new StationRenderer(this, world);
 }
