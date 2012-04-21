@@ -1,0 +1,10 @@
+.character-view
+  .avatar.pull-left
+  %h4!= character.name
+  %h5
+    Level
+    != character.level
+    ,
+    != display_class(character)
+  .exp-bar
+    .exp{ exp_bar_attr(character) }
