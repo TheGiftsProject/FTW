@@ -26,6 +26,12 @@ describe API::PivotalQuest do
     end
   end
 
+  describe :owner? do
+    it "should return true if I'm the owner" do
+      @quest.owner?
+    end
+  end
+
   describe :estimate! do
     it "should change quest estimation" do
       expect {
