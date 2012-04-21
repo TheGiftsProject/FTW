@@ -4,6 +4,7 @@ FTW::Application.routes.draw do
   resources :character
 
   match "dashboard" => "pages#dashboard", :as => "dashboard"
+  match "debug" => "pages#debug", :as => "debug"
   root :to => 'pages#landing'
 
 end
