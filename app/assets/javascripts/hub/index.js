@@ -49,3 +49,8 @@ Hub.prototype.questEnd = function() {
 Hub.prototype.questQuery = function() {
     this.world.getCharacter().goToBulletin();
 }
+
+Hub.prototype.questQueryOut = function() {
+    this.world.getCharacter().lookDown();
+}
+
