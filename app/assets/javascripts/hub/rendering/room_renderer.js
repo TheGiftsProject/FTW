@@ -67,5 +67,5 @@ RoomRenderer.prototype.renderFloor = function() {
 };
 
 RoomRenderer.prototype.renderDoor = function() {
-//    this.blit(this.sprite, 6, 0, this.cols - 1, 0);
+    this.renderer.blit(5, 3, Math.floor(this.renderer.cols / 2), this.renderer.rows - 1);
 };
