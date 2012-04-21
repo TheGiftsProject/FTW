@@ -1,3 +1,5 @@
+//= require_tree .
+
 function Hub(canvas, targetFPS) {
     this.ctx = canvas.getContext("2d");
     this.ctxWidth = canvas.width;
@@ -34,3 +36,16 @@ Hub.prototype.loop = function() {
     }
     window.requestAnimFrame(_.bind(this.loop, this));
 };
+
+Hub.prototype.questStart = function() {
+    this.world.getCharacter().goWork();
+}
+
+Hub.prototype.questEnd = function() {
+    this.world.getCharacter().stopWorking();
+    this.world.getCharacter().levelUp();
+}
+
+Hub.prototype.questQuery = function() {
+    this.world.getCharacter().goToBulletin();
+}

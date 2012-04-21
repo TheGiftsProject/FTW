@@ -2,11 +2,17 @@ function Character(world, x, y) {
     this.x = x || 0;
     this.y = y || 0;
     this.vel = Direction.NONE;
-    this.lastDir = Direction.BOT;
+    this.lastDir = Direction.BOTTOM;
     this.world = world;
     this.orders = [];
     this.workingAt = null;
+    this.state = Character.STATE_IDLE;
+
 };
+
+Character.STATE_IDLE    = 'idle';
+Character.STATE_WORKING = 'work';
+Character.STATE_DANCING = 'dance';
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
 
@@ -17,7 +23,7 @@ Character.prototype.update = function(dt) {
 };
 
 Character.prototype.isAvailable = function() {
-    return this.workingAt === null;;
+    return this.state != Character.STATE_WORKING;
 };
 
 Character.prototype.isMoving = function() {
@@ -26,26 +32,30 @@ Character.prototype.isMoving = function() {
 
 Character.prototype.completeOrder = function() {
    this.orders.splice(0, 1);
-}
+};
 
 // "API"
 Character.prototype.goWork = function() {
     var emptyStation = this.world.getEmptyStation();
     this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
     this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
-}
+};
 
 Character.prototype.stopWorking = function() {
     if (this.workingAt != null) {
         this.orders.push(new Order(Order.STOP_ORDER));
         this.orders.push(new Order(Order.MOVE_ORDER, this.workingAt.x, this.workingAt.y + 48));
     }
-}
+};
 
 Character.prototype.goToBulletin = function() {
     this.orders.push(new Order(Order.MOVE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24));
     this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.TOP));
-}
+};
+
+Character.prototype.levelUp = function() {
+    this.orders.push(new Order(Order.DANCE_ORDER, this.x, this.y));
+};
 
 //========================== ORDERS =============================/
 function Order(type, destX, destY, destObject) {
@@ -55,17 +65,19 @@ function Order(type, destX, destY, destObject) {
     this.destObject = destObject;
 };
 
-Order.MOVE_ORDER = 'move';
-Order.WORK_ORDER = 'work';
-Order.STOP_ORDER = 'stop';
-Order.FACE_ORDER = 'face';
+Order.MOVE_ORDER  = 'move';
+Order.WORK_ORDER  = 'work';
+Order.STOP_ORDER  = 'stop';
+Order.FACE_ORDER  = 'face';
+Order.DANCE_ORDER = 'dance';
 
 Order.prototype.perform = function(character) {
     switch (this.type) {
-        case Order.MOVE_ORDER: this.performMoveOrder(character); break;
-        case Order.WORK_ORDER: this.performWorkOrder(character); break;
-        case Order.STOP_ORDER: this.performStopOrder(character); break;
-        case Order.FACE_ORDER: this.performFaceOrder(character); break;
+        case Order.MOVE_ORDER:  this.performMoveOrder(character);  break;
+        case Order.WORK_ORDER:  this.performWorkOrder(character);  break;
+        case Order.STOP_ORDER:  this.performStopOrder(character);  break;
+        case Order.FACE_ORDER:  this.performFaceOrder(character);  break;
+        case Order.DANCE_ORDER: this.performDanceOrder(character); break;
     }
 };
 
@@ -97,6 +109,7 @@ Order.prototype.performMoveOrder = function(character) {
     else {
         character.lastDir = character.vel;
         character.vel = Direction.NONE;
+        character.state = Character.STATE_IDLE;
         character.completeOrder();
     }
 };
@@ -104,17 +117,25 @@ Order.prototype.performMoveOrder = function(character) {
 Order.prototype.performWorkOrder = function(character) {
     character.workingAt = this.destObject;
     this.destObject.occupy(character);
+    character.state = Character.STATE_WORKING;
     character.completeOrder();
 };
 
 Order.prototype.performStopOrder = function(character) {
     this.destObject.unoccupy();
     character.workingAt = null;
+    character.state = Character.STATE_IDLE;
     character.completeOrder();
 }
 
 Order.prototype.performFaceOrder = function(character) {
     character.lastDir = this.destObject;
+    character.state = Character.STATE_IDLE;
+    character.completeOrder();
+}
+
+Order.prototype.performDanceOrder = function(character) {
+    character.state = Character.STATE_DANCE;
     character.completeOrder();
 }
 
