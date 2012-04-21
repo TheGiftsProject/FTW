@@ -1,5 +1,4 @@
 FTW::Application.routes.draw do
-<<<<<<< HEAD
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
