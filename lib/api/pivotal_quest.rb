@@ -4,6 +4,10 @@ class API::PivotalQuest
     @pivotal_story = pivotal_story
   end
 
+  def owner?
+    @pivotal_story.owned_by == "current user name"
+  end
+
   def name
     @pivotal_story.name
   end

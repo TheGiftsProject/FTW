@@ -15,6 +15,13 @@ module API
       @pivotal_project.name
     end
 
+    def quests
+      quests = []
+      @pivotal_project.stories.all.each {|story| quests << API::PivotalQuest.new(story) }
+
+      quests
+    end
+
     def quest(id)
       API::PivotalQuest.new @pivotal_project.stories.find(id)
     end

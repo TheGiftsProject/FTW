@@ -14,5 +14,11 @@ describe API::PivotalCampaign do
     end
   end
 
+  describe :quests do
+    it "should return all stories" do
+      @campaign.quests.each {|quest| puts quest.name }
+    end
+  end
+
 
 end
