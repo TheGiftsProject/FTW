@@ -1,0 +1,11 @@
+!!!
+%html
+  %head
+    %title FTW
+    != stylesheet_link_tag :application
+    != javascript_include_tag :application
+    != csrf_meta_tag
+  %body
+    %h1 FTW
+    %h2 A gameifiend project manager. Quest your task, kill the bugs, get loot - woot.
+    != yield
