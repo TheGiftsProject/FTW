@@ -7,6 +7,10 @@ module API
       @pivotal_project = pivotal_project
     end
 
+    def ref_id
+      @pivotal_project.id
+    end
+
     def name
       @pivotal_project.name
     end

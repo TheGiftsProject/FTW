@@ -1,7 +1,6 @@
 class CharacterController < ApplicationController
   def new
-
-
+    @campaigns = API::Pivotal.new(current_user).campaigns
   end
 
   def create

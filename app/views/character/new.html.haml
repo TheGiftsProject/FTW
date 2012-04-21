@@ -7,6 +7,6 @@
     != label_tag "character[klass]", "Class"
     != select_tag "character[klass]", options_from_collection_for_select(Klasses::All, :id, :name)
     != label_tag "character[project]", "Project"
-    != select_tag "character[project]", [1,2,3]
+    != select_tag "character[project]", options_from_collection_for_select(@campaigns, :ref_id, :name)
 
     != submit_tag "Create"
