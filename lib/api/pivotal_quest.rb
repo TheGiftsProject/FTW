@@ -1,7 +1,11 @@
-class API::Pivotal::Story
+class API::PivotalQuest
 
   def initialize(pivotal_story)
     @pivotal_story = pivotal_story
+  end
+
+  def name
+    @pivotal_story.name
   end
 
   def start

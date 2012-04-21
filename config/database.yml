@@ -1,7 +1,7 @@
 defaults: &defaults
   adapter: mysql2
   username: root
-  password: hello
+  password: "123456"
   encoding: utf8
 
 production:
