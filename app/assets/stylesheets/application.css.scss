@@ -2,9 +2,16 @@
  *= require_self
  *= require_tree .
 */
+
+@import "bootstrap";
+
+body { padding-top: 60px} /* Must be between bootstrap and bootstrap-responsive */
+
+@import "bootstrap-responsive";
+
 body{
   font-family: 'Press Start 2P', cursive;
-  background: #ff7f50;
+  background: #ff7f50
 }
 
 h1,h2,h3,h4,h5{

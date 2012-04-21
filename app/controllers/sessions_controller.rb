@@ -1,8 +1,13 @@
 class SessionsController < ApplicationController
   def create
       client = login(params[:name], params[:password])
-      flash[:info] = "hello #{client.inspect}"
-      redirect_to "/"
+      if client.present?
+        sign_in(client)
+        redirect_to dashboard_path
+      else
+        flash[:error] = "Wrong username or password"
+        redirect_to "/"
+      end
   end
 
 
