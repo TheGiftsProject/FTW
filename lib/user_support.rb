@@ -1,11 +1,17 @@
 module UserSupport
 
+  def authenticate_user
+    redirect_to landing_path user_signed_in?
+  end
+
   def sign_in(user)
     session[:user_token] = user
+    load_character
   end
 
   def sign_out
     session[:user_token] = nil
+    load_character
   end
 
   def user_signed_in?
@@ -25,17 +31,21 @@ module UserSupport
   end
 
   def login(options = {})
-    if options[:token].present?
+    if options[:user].present?
+      return PivotalTracker::Client.token(options[:user], options[:password])
+
+    else
       PivotalTracker::Client.token = options[:token]
 
-      API::Pivotal.new(current_user).campaigns # Try and get the campaings
+      API::Pivotal.new(options[:token]).campaigns # Try and get the campaings
 
       return options[:token]
-    else
-      return PivotalTracker::Client.token(options[:user], options[:pass])
     end
+
   rescue RestClient::Unauthorized
-    nil
+    return nil
+  rescue PivotalTracker::Client::NoToken
+    return nil
   end
 
 end
