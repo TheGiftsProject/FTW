@@ -24,6 +24,7 @@ Character.prototype.isMoving = function() {
     return this.vel != Direction.NONE;
 };
 
+// "API"
 Character.prototype.goWork = function() {
     var emptyStation = this.world.getEmptyStation();
     this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
@@ -35,6 +36,12 @@ Character.prototype.stopWorking = function() {
         this.orders.push(new Order(Order.STOP_ORDER));
         this.orders.push(new Order(Order.MOVE_ORDER, this.workingAt.x, this.workingAt.y + 48));
     }
+}
+
+Character.prototype.goToBulletin = function() {
+    var emptyStation = this.world.getEmptyStation();
+    this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
+    this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
 }
 
 //========================== ORDERS =============================/
