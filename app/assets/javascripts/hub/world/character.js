@@ -31,6 +31,10 @@ Character.prototype.isMoving = function() {
     return this.state === Character.STATE_MOVING;
 };
 
+Character.prototype.isDancing = function() {
+    return this.state === Character.STATE_DANCING;
+};
+
 Character.prototype.completeOrder = function() {
    this.orders.splice(0, 1);
 };
