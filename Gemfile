@@ -16,6 +16,7 @@ end
 gem 'jquery-rails'
 gem 'pivotal-tracker'
 gem 'ruby-debug19', :require => 'ruby-debug'
+gem "enumify"
 
 group :development, :test do
   gem 'rspec-rails'
