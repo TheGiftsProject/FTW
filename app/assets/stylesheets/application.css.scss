@@ -2,3 +2,19 @@
  *= require_self
  *= require_tree .
 */
+body{
+  font-family: 'Press Start 2P', cursive;
+}
+
+h1,h2,h3,h4,h5{
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+  font-size: 100px;
+  color: yellow;
+  text-shadow: black 10px 10px;
+  text-align: center;
+}
+
