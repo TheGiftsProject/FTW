@@ -1,4 +1,4 @@
-- quests = ["A", "B", "C", "D"] #character.quests
+- quests = character.quests
 
 .quest_log
   - if quests.blank?
@@ -9,8 +9,14 @@
       - quests.each do |quest|
         %li
           %a
-            %i.icon-flag
-            = quest
-            .btn.btn-success.btn-mini.pull-right
-              %i.icon-check
-              Done
+            -if quest.bug?
+              %i.icon-leaf
+            - else
+              %i.icon-flag
+            %span.quest_name= quest.name
+            - if quest.state == "started"
+              .btn.btn-success.btn-mini.pull-right
+                Done
+            - else
+              .btn.btn-warning.btn-mini.pull-right
+                Start
