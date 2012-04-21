@@ -8,6 +8,7 @@ function Renderer(ctx, world) {
     this.rows = world.height / Renderer.TILE_SIZE;
     this.roomRenderer = new RoomRenderer(this);
     this.characterRenderer = new CharacterRenderer(this, world);
+    this.stationRenderer = new StationRenderer(this, world);
 }
 
 Renderer.TILE_SIZE = 48;
@@ -18,6 +19,7 @@ Renderer.prototype.render = function(dt) {
     this.ctx.save();
     this.accumulator += dt;
     this.roomRenderer.render();
+    this.stationRenderer.render();
     this.characterRenderer.render();
     this.ctx.restore();
 };

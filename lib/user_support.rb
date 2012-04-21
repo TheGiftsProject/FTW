@@ -1,17 +1,17 @@
 module UserSupport
 
-  def authenticate_user
-    redirect_to landing_path user_signed_in?
+  def authenticate_user(options)
+    redirect_to landing_path unless user_signed_in?
   end
 
   def sign_in(user)
     session[:user_token] = user
-    load_character
+    load_current_character
   end
 
   def sign_out
     session[:user_token] = nil
-    load_character
+    load_current_character
   end
 
   def user_signed_in?
@@ -24,6 +24,8 @@ module UserSupport
 
   def current_character
     Character.find_by_token(current_user)
+  rescue ActiveSupport::RecordNotFound
+    return nil
   end
 
   def has_character?
