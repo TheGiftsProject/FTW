@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   before_filter :must_be_logged_in, :only => [:dashboard]
 
   def landing
+    redirect_to dashboard_path if has_character?
   end
 
   def dashboard
