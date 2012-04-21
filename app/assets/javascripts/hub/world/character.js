@@ -62,7 +62,9 @@ Character.prototype.goToBulletin = function() {
 };
 
 Character.prototype.lookDown = function() {
-    this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.BOTTOM));
+    if (this.state === Character.STATE_LOOKING) {
+        this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.BOTTOM));
+    }
 };
 
 Character.prototype.levelUp = function() {
