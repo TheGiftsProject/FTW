@@ -1,4 +1,7 @@
 class CharacterController < ApplicationController
+
+  before_filter :load_character, :only => [:show]
+
   def new
     @campaigns = API::Pivotal.new(current_user).campaigns
   end
@@ -17,4 +20,13 @@ class CharacterController < ApplicationController
   def show
 
   end
+
+  private
+
+  def load_character
+    @character = Character.find(params[:id])
+    redirect_to "403" and return :rendered if @character.nil? or @character != current_character
+  end
+
+
 end

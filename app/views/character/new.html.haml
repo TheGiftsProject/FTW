@@ -6,7 +6,8 @@
     != text_field_tag "character[name]"
     != label_tag "character[klass]", "Class"
     != select_tag "character[klass]", options_from_collection_for_select(Klasses::All, :id, :name)
-    != label_tag "character[project]", "Project"
-    != select_tag "character[project]", options_from_collection_for_select(@campaigns, :ref_id, :name)
+    != label_tag "character[project_id]", "Project"
+    != select_tag "character[project_id]", options_from_collection_for_select(@campaigns, :ref_id, :name)
+    != hidden_field_tag "character[token]", current_user
 
     != submit_tag "Create"

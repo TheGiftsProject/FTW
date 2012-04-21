@@ -9,13 +9,11 @@ class API::PivotalQuest
   end
 
   def start!
-    debugger
-    @pivotal_story.update(:state => "started")
-    #@pivotal_story.start!
+    @pivotal_story.update(:current_state => "started")
   end
 
   def finish!
-    @pivotal_story.update(:complete => true)
+    @pivotal_story.update(:current_state => "finished")
   end
 
   def estimate(points)
