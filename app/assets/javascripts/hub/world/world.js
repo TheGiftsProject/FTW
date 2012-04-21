@@ -10,6 +10,7 @@ function World(width, height) {
     this.height = height;
 
     char.goWork();
+    char.stopWorking();
 }
 
 World.prototype.update = function(dt) {

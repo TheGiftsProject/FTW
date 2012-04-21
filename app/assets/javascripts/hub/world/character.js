@@ -24,6 +24,10 @@ Character.prototype.isMoving = function() {
     return this.vel != Direction.NONE;
 };
 
+Character.prototype.completeOrder = function() {
+   this.orders.splice(0, 1);
+}
+
 // "API"
 Character.prototype.goWork = function() {
     var emptyStation = this.world.getEmptyStation();
@@ -92,18 +96,20 @@ Order.prototype.performMoveOrder = function(character) {
     else {
         character.lastDir = character.vel;
         character.vel = Direction.NONE;
-        character.orders.splice(0, 1);
+        character.completeOrder();
     }
 };
 
 Order.prototype.performWorkOrder = function(character) {
     character.workingAt = this.destObject;
     this.destObject.occupy(character);
+    character.completeOrder();
 };
 
 Order.prototype.performStopOrder = function(character) {
     this.destObject.unoccupy();
     character.workingAt = null;
+    character.completeOrder();
 }
 
 //========================== DIRECTION =============================/
