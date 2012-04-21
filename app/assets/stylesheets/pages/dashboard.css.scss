@@ -17,3 +17,13 @@
 .quest_name{
   text-overflow: ellipsis;
 }
+
+.quest_log{
+  .nav-tabs{
+    background: rgba(255,255,255,0.3);
+    border: 1px solid black;
+  }
+  .nav-tabs > li > a {
+    overflow: hidden;
+  }
+}
