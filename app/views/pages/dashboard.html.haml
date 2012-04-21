@@ -1,13 +1,11 @@
 .dashboard.span12
   %h3 FTW Dashboard
-  .row
-    .span6
+  .span3.char-info.pull-left
+    .row.char-data-section
       != render :partial => "/character/character", :locals => {character: @current_character}
       != render :partial => "/character/skills", :locals => {character: @current_character}
-    .span6
+    .row.char-data-section
       != render :partial => "/character/quest_log", :locals => {character: @current_character}
-  .row
-    %hr
-    .span10
-      != render :partial => "/partials/hub"
+  .span8
+    != render :partial => "/partials/hub"
 
