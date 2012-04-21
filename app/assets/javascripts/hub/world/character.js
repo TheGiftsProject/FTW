@@ -3,7 +3,8 @@ function Character(world, x, y) {
     this.y = y || 0;
     this.vel = Direction.NONE;
     this.world = world;
-    this.orders = [new Order(Order.MOVE_ORDER, 188, 188), new Order(Order.MOVE_ORDER, 288, 188), new Order(Order.MOVE_ORDER, 188, 48)];
+    this.orders = [];
+    this.working = false;
 };
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
@@ -14,22 +15,35 @@ Character.prototype.update = function(dt) {
     }
 };
 
+Character.prototype.isAvailable = function() {
+    return !this.working;
+};
+
 Character.prototype.isMoving = function() {
     return this.vel != Direction.NONE;
 };
 
+Character.prototype.goWork = function() {
+    var emptyStation = this.world.getEmptyStation();
+    this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
+    this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
+}
+
 //========================== ORDERS =============================/
-function Order(type, destX, destY) {
+function Order(type, destX, destY, destObject) {
     this.type = type;
     this.destX = destX;
     this.destY = destY;
+    this.destObject = destObject;
 };
 
 Order.MOVE_ORDER = 'move';
+Order.WORK_ORDER = 'work';
 
 Order.prototype.perform = function(character) {
     switch (this.type) {
-        case Order.MOVE_ORDER: this.performMoveOrder(character);
+        case Order.MOVE_ORDER: this.performMoveOrder(character); break;
+        case Order.WORK_ORDER: this.performWorkOrder(character); break;
     }
 };
 
@@ -63,6 +77,11 @@ Order.prototype.performMoveOrder = function(character) {
         character.orders.splice(0, 1);
     }
 };
+
+Order.prototype.performWorkOrder = function(character) {
+    character.working = true;
+    this.destObject.occupy(character);
+}
 
 //========================== DIRECTION =============================/
 function Direction() {};
