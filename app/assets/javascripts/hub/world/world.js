@@ -3,7 +3,7 @@ function World(width, height) {
     char = new Character(this, 188, 240);
     station = new Station(this, 480, 48);
 
-    this.bulletin = new Bulletin(this, 48, 96);
+    this.bulletin = new Bulletin(this, 96, 96);
     this.characters = [char];
     this.stations = [station];
     this.width = width;
@@ -21,5 +21,5 @@ World.prototype.getEmptyStation = function() {
 }
 
 World.prototype.getCharacter = function() {
-    return this.character[0];
+    return this.characters[0];
 }

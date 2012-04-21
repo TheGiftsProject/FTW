@@ -43,7 +43,7 @@ Character.prototype.goWork = function() {
 
 Character.prototype.stopWorking = function() {
     if (this.workingAt != null) {
-        this.orders.push(new Order(Order.STOP_ORDER));
+        this.orders.push(new Order(Order.STOP_ORDER, this.workingAt.x, this.workingAt.y + 48, this.workingAt));
         this.orders.push(new Order(Order.MOVE_ORDER, this.workingAt.x, this.workingAt.y + 48));
     }
 };

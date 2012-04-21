@@ -25,6 +25,7 @@ class CharacterController < ApplicationController
 
   def start_quest
     @character.start_quest(params[:quest_id])
+    render :javascript => {}
   end
 
   def finish_quest

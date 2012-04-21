@@ -10,7 +10,10 @@ class QuestLog
       id = element.data('id')
       action = element.data('action')
       url = element.data('url')
-      window.hub.apply(action)
+#      window.hub.call(action)
+      $.getJSON(url, quest_id: id , (data) =>
+
+      )
 
 
 
