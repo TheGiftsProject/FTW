@@ -9,7 +9,7 @@ describe API::PivotalCampaign do
 
   describe :quest do
     it "should retrieve pivotal quest when given story id" do
-      quest = @campaign.quest(28399107)
+      quest = @campaign.quest(28399437)
       quest.name.should == "test story"
     end
   end

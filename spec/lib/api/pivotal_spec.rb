@@ -10,7 +10,7 @@ describe API::Pivotal do
 
     it "should return pivotal campaign when given project id" do
       campaign = @pivotal.campaign(PIVOTAL['project'])
-      campaign.name.should match(/eBay Group Gifts/)
+      campaign.name.should match(/FTW Sandbox/)
     end
 
 
