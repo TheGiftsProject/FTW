@@ -16,3 +16,8 @@ Station.prototype.workingCharacter = function() {
 Station.prototype.occupy = function(character) {
   this.workingCharacter = character;
 };
+
+Station.prototype.unoccupy = function() {
+    this.workingCharacter = null;
+};
+
