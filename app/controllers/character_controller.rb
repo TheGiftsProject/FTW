@@ -1,5 +1,7 @@
 class CharacterController < ApplicationController
 
+  authenticate
+
   before_filter :load_character, :only => [:show]
 
   def new
