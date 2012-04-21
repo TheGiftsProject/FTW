@@ -40,6 +40,10 @@ h2{
   color: white;
 }
 
+span.description{
+  float: left;
+}
+
 
 input[type=submit] {
   box-shadow: black 5px 5px;
@@ -50,4 +54,15 @@ input[type=submit] {
   margin-top: 15px;
   border-radius: 0px;
   font-family: 'Press Start 2P', cursive;
+}
+
+.dropdown-toggle {
+  padding: 0px !important;
+  .account-name {
+    color: #005580 !important;
+  }
+
+  .nav-text {
+    font-size: 12px;
+  }
 }

@@ -3,13 +3,15 @@ function Character(world, x, y) {
     this.y = y || 0;
     this.vel = Direction.NONE;
     this.world = world;
-    this.orders = [];
+    this.orders = [new Order(Order.MOVE_ORDER, 188, 188), new Order(Order.MOVE_ORDER, 288, 188), new Order(Order.MOVE_ORDER, 188, 48)];
 };
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
 
 Character.prototype.update = function(dt) {
-    _.each(this.orders, function(order) { order.perform(this); });
+    if (this.orders.length > 0) {
+        _.first(this.orders).perform(this);
+    }
 };
 
 Character.prototype.isMoving = function() {
@@ -58,7 +60,7 @@ Order.prototype.performMoveOrder = function(character) {
     // reached destination.
     else {
         character.vel = Direction.NONE;
-        character.orders.shift();
+        character.orders.splice(0, 1);
     }
 };
 

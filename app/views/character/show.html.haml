@@ -1,0 +1,6 @@
+%h3 Character View
+!= render :partial => "character", :locals => {:character => @character}
+%h3 Skills
+!= render :partial => "skills", :locals => {:character => @character}
+%h3 Quest Log
+!= render :partial => "quest_log", :locals => {:character => @character}
