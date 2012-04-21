@@ -24,4 +24,18 @@ module UserSupport
     current_character.present?
   end
 
+  def login(options = {})
+    if options[:token].present?
+      PivotalTracker::Client.token = options[:token]
+
+      API::Pivotal.new(current_user).campaigns # Try and get the campaings
+
+      return options[:token]
+    else
+      return PivotalTracker::Client.token(options[:user], options[:pass])
+    end
+  rescue RestClient::Unauthorized
+    nil
+  end
+
 end
