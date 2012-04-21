@@ -19,5 +19,11 @@ module API
       API::PivotalQuest.new @pivotal_project.stories.find(id)
     end
 
+    def quests
+      @pivotal_project.stories.map do |story|
+        API::PivotalQuest.new story
+      end
+    end
+
   end
 end

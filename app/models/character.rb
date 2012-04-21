@@ -24,6 +24,10 @@ class Character < ActiveRecord::Base
     save!
   end
 
+  def quests
+    API::Pivotal.new(token).campaign(project_id).quests
+  end
+
   private
 
   def init_char
