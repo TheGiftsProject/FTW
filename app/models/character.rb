@@ -16,6 +16,25 @@ class Character < ActiveRecord::Base
     Character.needed_exp(self.level)
   end
 
+  def finished_quest(quest)
+    if quest.estimation.nil? or quest.estimation < 0
+      self.exp += 15
+    else
+      self.exp += 2**quest.estimation + 10
+    end
+
+    while self.exp > needed_exp
+      self.level += 1
+    end
+    save!
+  end
+
+  def quests
+    API::Pivotal.new(token).campaign(project_id).quests.accept do |quest|
+      ["started", "unscheduled"].include? quest.status
+    end
+  end
+
   private
 
   def init_char
