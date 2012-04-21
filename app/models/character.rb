@@ -31,6 +31,8 @@ class Character < ActiveRecord::Base
       self.exp += 2**quest.estimation + 10
     end
 
+    self.exp + 200
+
     while self.exp > needed_exp
       self.level += 1
     end

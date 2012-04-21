@@ -5,9 +5,9 @@ class QuestLog
     @el.find('.btn').click(
       -> that.buttonPressed($(@).parents("li"))
     )
-    @el.mouseover(
+    @el.mouseenter(
       => window.hub.questQuery()
-    ).mouseout(
+    ).mouseleave(
       => window.hub.questQueryOut()
     )
 
