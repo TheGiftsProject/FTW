@@ -21,5 +21,5 @@ World.prototype.getEmptyStation = function() {
 }
 
 World.prototype.getCharacter = function() {
-    return this.character[0];
+    return this.characters[0];
 }
