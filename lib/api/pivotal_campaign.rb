@@ -7,12 +7,16 @@ module API
       @pivotal_project = pivotal_project
     end
 
+    def ref_id
+      @pivotal_project.id
+    end
+
     def name
       @pivotal_project.name
     end
 
     def quest(id)
-      @pivotal_project.stories.find(id)
+      API::PivotalQuest.new @pivotal_project.stories.find(id)
     end
 
   end
