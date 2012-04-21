@@ -7,6 +7,7 @@ function LevelRenderer(ctx, world) {
     this.cols = world.width / LevelRenderer.TILE_SIZE;
     this.rows = world.height / LevelRenderer.TILE_SIZE;
     this.roomRenderer = new RoomRenderer(this);
+    this.characterRenderer = new CharacterRenderer(this, world);
 }
 
 LevelRenderer.TILE_SIZE = 48;
@@ -17,10 +18,11 @@ LevelRenderer.prototype.render = function(dt) {
     this.ctx.save();
     this.accumulator += dt;
     this.roomRenderer.render();
+    this.characterRenderer.render();
     this.ctx.restore();
 };
 
-LevelRenderer.prototype.blit = function(srcCol, srcRow, col, row){
+LevelRenderer.prototype.tileBlit = function(srcCol, srcRow, col, row){
     var size = LevelRenderer.TILE_SIZE;
     this.ctx.drawImage(this.sprite, srcCol * size, srcRow * size, size, size, col * size, row * size, size, size);
 };
