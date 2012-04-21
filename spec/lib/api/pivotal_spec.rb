@@ -10,7 +10,6 @@ describe API::Pivotal do
 
     it "should return pivotal campaign when given project id" do
       campaign = @pivotal.campaign(PIVOTAL['project'])
-      puts "campaign class: #{campaign.class}"
       campaign.name.should match(/eBay Group Gifts/)
     end
 
