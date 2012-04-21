@@ -1,27 +1,29 @@
-function LevelRenderer() {
-    this.height = 16;
-    this.width = 16;
-    this.wall = new Image();
-    this.wall.src = "resources/images/wall.png";
-    this.road = new Image();
-    this.road.src = "resources/images/roads.png";
-    this.wallBottom = new Image();
-    this.wallBottom.src = "resources/images/road-side.png";
-    this.roof = new Image();
-    this.roof.src = "resources/images/roof.png";
-    this.coins = new Image();
-    this.coins.src = "resources/images/coins.png";
-    this.tileRenderers = {};
-    this.accumulator = Math.floor(Math.random() * 60);
+function LevelRenderer(ctx, width, height) {
+    this.sprite = new Image();
+    this.sprite.src = 'assets/images/devquest-sprite.png';
+    this.accumulator = 0;
+    this.ctx = ctx;
+    this.cols = width / LevelRenderer.TILE_SIZE;
+    this.rows = height / LevelRenderer.TILE_SIZE;
 }
 
-LevelRenderer.prototype.update = function(dt) {
-    this.accumulator = (this.accumulator + dt) % 60;
-}
+LevelRenderer.TILE_SIZE = 48;
 
-LevelRenderer.prototype.renderTile = function(row, col, world, context){
-    if (!([row,col] in this.tileRenderers)) {
-    this.tileRenderers[[row,col]] = new TileRenderer(row, col, world, context, this);
+LevelRenderer.prototype.render = function(dt) {
+    this.accumulator += dt;
+    this.ctx.strokeStyle = "#000000";
+    this.renderTiles();
+};
+
+LevelRenderer.prototype.renderTiles = function() {
+    for (var col = 0; col < this.cols; col++) {
+        for (var row = 0; row < this.rows; row++) {
+            this.blit(this.sprite, 5, 2, col, row);
+        }
     }
-this.tileRenderers[[row,col]].render(row, col);
+};
+
+LevelRenderer.prototype.blit = function(sprite, srcCol, srcRow, col, row){
+    var size = LevelRenderer.TILE_SIZE;
+    this.ctx.drawImage(sprite, srcCol * size, srcRow * y, size, size, col * size, row * size, size, size);
 };

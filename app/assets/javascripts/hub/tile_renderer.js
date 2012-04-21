@@ -51,9 +51,6 @@ TileRenderer.prototype.fits = function(arr){
     return true;
 };
 
-TileRenderer.prototype.blit = function(sprite, srcX, srcY){
-    this.context.drawImage(sprite, srcX, srcY, 16, 16, this.render_col*16, this.render_row*16, 16, 16);
-};
 
 TileRenderer.prototype.render = function(render_row, render_col){
     this.render_row = render_row;
