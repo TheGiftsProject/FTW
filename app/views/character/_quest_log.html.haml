@@ -7,7 +7,7 @@
     %h2 Quest List
     %ul.nav.nav-tabs.nav-stacked
       - quests.each do |quest|
-        %li
+        %li{:data => {:id => quest.quest_id, :action => quest.state == "questStart" ? "questEnd" : "start", :url => quest.state == "started" ? finish_quest_character_path(character) : start_quest_character_path(character)}}
           %a
             -if quest.bug?
               %i.icon-leaf
