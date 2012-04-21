@@ -3,7 +3,7 @@ function CharacterRenderer(renderer, world) {
     this.world = world;
 }
 
-CharacterRenderer.MOVE_TOTAL_ANIM_TIME = 0.4;
+CharacterRenderer.MOVE_TOTAL_ANIM_TIME = 0.5;
 CharacterRenderer.MOVE_FRAME_MAP       = [0, 1, 0 ,2];
 
 CharacterRenderer.prototype.render = function() {
