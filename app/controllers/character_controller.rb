@@ -25,12 +25,12 @@ class CharacterController < ApplicationController
 
   def start_quest
     @character.start_quest(params[:quest_id])
-    render :javascript => {}
+    render :json => {:blah => 3}
   end
 
   def finish_quest
     @character.finish_quest(params[:quest_id])
-    render :javascript => {:level => @character.level, :exp_percent => @character.exp_percent}
+    render :json => {:level => @character.level, :exp_percent => @character.exp_percent}
   end
 
   private
