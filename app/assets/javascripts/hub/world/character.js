@@ -43,9 +43,8 @@ Character.prototype.stopWorking = function() {
 }
 
 Character.prototype.goToBulletin = function() {
-    var emptyStation = this.world.getEmptyStation();
-    this.orders.push(new Order(Order.MOVE_ORDER, emptyStation.x, emptyStation.y));
-    this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
+    this.orders.push(new Order(Order.MOVE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24));
+    this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.TOP));
 }
 
 //========================== ORDERS =============================/
@@ -59,12 +58,14 @@ function Order(type, destX, destY, destObject) {
 Order.MOVE_ORDER = 'move';
 Order.WORK_ORDER = 'work';
 Order.STOP_ORDER = 'stop';
+Order.FACE_ORDER = 'face';
 
 Order.prototype.perform = function(character) {
     switch (this.type) {
         case Order.MOVE_ORDER: this.performMoveOrder(character); break;
         case Order.WORK_ORDER: this.performWorkOrder(character); break;
         case Order.STOP_ORDER: this.performStopOrder(character); break;
+        case Order.FACE_ORDER: this.performFaceOrder(character); break;
     }
 };
 
@@ -109,6 +110,11 @@ Order.prototype.performWorkOrder = function(character) {
 Order.prototype.performStopOrder = function(character) {
     this.destObject.unoccupy();
     character.workingAt = null;
+    character.completeOrder();
+}
+
+Order.prototype.performFaceOrder = function(character) {
+    character.lastDir = this.destObject;
     character.completeOrder();
 }
 
