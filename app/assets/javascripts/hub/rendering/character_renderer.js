@@ -9,5 +9,8 @@ CharacterRenderer.prototype.render = function() {
 };
 
 CharacterRenderer.prototype.renderCharacter = function(character) {
+//    if (character.isMoving()) {
+//        if (character.velX > 0)
+//    }
     this.renderer.pixelBlit(0, 0, character.x, character.y);
 };
