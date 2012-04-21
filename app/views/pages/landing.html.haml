@@ -1,5 +1,13 @@
 .login
-  Login to View
-  %span (with your Pivotal Account)
+  != form_tag session_path, :method => :post do
+    Login to View
+    %span (with your Pivotal Account)
 
-  %button Login
+    .fields
+      != label_tag :name
+      != text_field_tag :name
+      %br
+      != label_tag :password
+      != password_field_tag :password
+
+    %button Login
