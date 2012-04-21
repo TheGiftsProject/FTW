@@ -3,8 +3,8 @@
   %h4!= character.name
   %h5
     Level
-    != character.level
+    %span.level!= character.level
     ,
     != display_class(character)
   .exp-bar
-    .exp{ exp_bar_attr(character) }
+    .exp.anim{ exp_bar_attr(character) }
