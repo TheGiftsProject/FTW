@@ -14,6 +14,7 @@ Character.STATE_IDLE    = 'idle';
 Character.STATE_WORKING = 'work';
 Character.STATE_DANCING = 'dance';
 Character.STATE_MOVING  = 'move';
+Character.STATE_LOOKING = 'look';
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
 
@@ -54,8 +55,14 @@ Character.prototype.stopWorking = function() {
 };
 
 Character.prototype.goToBulletin = function() {
-    this.orders.push(new Order(Order.MOVE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24));
-    this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.TOP));
+    if (this.state === Character.STATE_IDLE) {
+        this.orders.push(new Order(Order.MOVE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24));
+        this.orders.push(new Order(Order.LOOK_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.TOP));
+    }
+};
+
+Character.prototype.lookDown = function() {
+    this.orders.push(new Order(Order.FACE_ORDER, this.world.bulletin.x, this.world.bulletin.y + 24, Direction.BOTTOM));
 };
 
 Character.prototype.levelUp = function() {
@@ -74,6 +81,7 @@ Order.MOVE_ORDER  = 'move';
 Order.WORK_ORDER  = 'work';
 Order.STOP_ORDER  = 'stop';
 Order.FACE_ORDER  = 'face';
+Order.LOOK_ORDER  = 'look';
 Order.DANCE_ORDER = 'dance';
 
 Order.prototype.perform = function(character) {
@@ -82,6 +90,7 @@ Order.prototype.perform = function(character) {
         case Order.WORK_ORDER:  this.performWorkOrder(character);  break;
         case Order.STOP_ORDER:  this.performStopOrder(character);  break;
         case Order.FACE_ORDER:  this.performFaceOrder(character);  break;
+        case Order.LOOK_ORDER:  this.performLookOrder(character);  break;
         case Order.DANCE_ORDER: this.performDanceOrder(character); break;
     }
 };
@@ -133,6 +142,11 @@ Order.prototype.performStopOrder = function(character) {
     character.workingAt = null;
     character.state = Character.STATE_IDLE;
     character.completeOrder();
+}
+
+Order.prototype.performLookOrder = function(character) {
+    this.performFaceOrder(character);
+    character.state = Character.STATE_LOOKING;
 }
 
 Order.prototype.performFaceOrder = function(character) {
