@@ -1,13 +1,25 @@
-.login
-  != form_tag session_path, :method => :post do
-    Login to View
-    %span (with your Pivotal Account)
+.offset2.span7
+  .login
+    != form_tag session_path, :method => :post do
+      Login to View
+      %span (with your Pivotal Account)
 
-    .fields
-      != label_tag :name
-      != text_field_tag :name
-      %br
-      != label_tag :password
-      != password_field_tag :password
-
-    %button Login
+      .fields.span7
+        .row
+          .span3
+            .row
+              != label_tag :name
+              != text_field_tag :name
+            .row
+              != label_tag :password
+              != password_field_tag :password
+          .span1.or-line
+            .top-line
+            .or-char or
+            .bottom-line
+          .span3
+            .row
+              != label_tag :token
+              != text_field_tag :token
+        .span5
+          != submit_tag "Login"

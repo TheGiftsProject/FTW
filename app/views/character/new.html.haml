@@ -1,0 +1,10 @@
+.new_char
+  %h3 Create a new Character
+  != form_tag character_index_path, :method => :post do
+    .avatar
+    != label_tag :name
+    != text_field_tag :name
+    != label_tag :klass, "Class"
+    != select_tag :klass, options_from_collection_for_select(Klasses::All, :id, :name)
+    != label_tag :project
+    != select_tag :project, [1,2,3]

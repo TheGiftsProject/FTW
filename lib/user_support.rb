@@ -16,4 +16,12 @@ module UserSupport
     session[:user_token]
   end
 
+  def current_character
+    Character.find_by_token(current_user)
+  end
+
+  def has_character?
+    current_character.present?
+  end
+
 end

@@ -6,8 +6,8 @@ function Hub(canvas, targetFPS) {
     this.ctxWidth = canvas.width;
     this.ctxHeight = canvas.height;
     this.targetInterval = Math.floor(1000 / targetFPS);
-    this.levelRenderer = new LevelRenderer(this.ctx, this.ctxWidth, this.ctxHeight);
-//    this.world = new HubWorld();
+    this.world = new World(this.ctxWidth, this.ctxHeight);
+    this.levelRenderer = new LevelRenderer(this.ctx, this.world);
 }
 
 Hub.prototype.startLoop = function() {
@@ -27,37 +27,13 @@ Hub.prototype.loop = function() {
     while (this.frameTimeAccumulator >= this.targetInterval) {
         var dt = this.targetInterval / 1000;
         this.renderAccumulator += dt;
-        this.update(dt);
+        this.world.update(dt);
         this.frameTimeAccumulator -= this.targetInterval;
         updated = true;
     }
     if (updated) {
-        this.render(this.renderAccumulator);
+        this.levelRenderer.render(this.renderAccumulator);
         this.renderAccumulator = 0;
     }
     window.requestAnimFrame(_.bind(this.loop, this));
 };
-
-Hub.prototype.update = function(dt) {
-//    this.level.update(dt);
-//    for (var i = 0; i < this.world.entities.length; i++){
-//        this.world.entities[i].update(dt);
-//    }
-};
-
-Hub.prototype.render = function(dt) {
-    // clear last frame
-    this.ctx.clearRect(0, 0, this.ctxWidth, this.ctxHeight);
-
-    // render game
-    this.ctx.save();
-
-    this.levelRenderer.render(dt);
-//    for (var i=0; i < this.world.entities.length ; i++){
-//        this.world.entities[i].render(this.ctx);
-//    }
-    this.ctx.restore();
-};
-
-var hub = new Hub(document.getElementById('canvas'), 60);
-hub.startLoop();
