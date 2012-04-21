@@ -24,6 +24,11 @@
                 %a{href: "about"} About
               %li
                 %a{href: "concat"} Contact
+            - if @current_character.present?
+              %p.navbar-text.pull-right
+                Logged in as
+                %a= link_to @current_character.name, dashboard_path
+
     .container
       %h1 FTW
       %h2 An RPG/Project Management hybrid.<br> Quest through tasks, kill the bugs, get loot - woot.
