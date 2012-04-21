@@ -6,7 +6,7 @@ function Hub(canvas, targetFPS) {
     this.ctxWidth = canvas.width;
     this.ctxHeight = canvas.height;
     this.targetInterval = Math.floor(1000 / targetFPS);
-    this.levelRenderer = new LevelRenderer(ctx, ctxWidth, ctxHeight);
+    this.levelRenderer = new LevelRenderer(this.ctx, this.ctxWidth, this.ctxHeight);
 //    this.world = new HubWorld();
 }
 
@@ -59,5 +59,5 @@ Hub.prototype.render = function(dt) {
     this.ctx.restore();
 };
 
-var hub = new Hub($('canvas'), 60);
+var hub = new Hub(document.getElementById('canvas'), 60);
 hub.startLoop();
