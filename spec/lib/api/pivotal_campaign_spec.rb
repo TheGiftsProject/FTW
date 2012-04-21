@@ -3,8 +3,8 @@ require 'spec_helper'
 describe API::PivotalCampaign do
 
   before(:all) do
-    pivotal = API::Pivotal.new PIVOTAL[:token]
-    @campaign = pivotal.campaign(PIVOTAL[:project])
+    pivotal = API::Pivotal.new PIVOTAL['token']
+    @campaign = pivotal.campaign(PIVOTAL['project'])
   end
 
   describe :quest do
