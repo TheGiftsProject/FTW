@@ -10,7 +10,9 @@ module API
     end
 
     def campaigns
-      # wrap all pivotal projects into a campaign object
+      campaigns = []
+      PivotalTracker::Project.all.each { |project| campaigns << API::PivotalCampaign.new(project) }
+      campaigns
     end
 
     def campaign(id)

@@ -12,7 +12,7 @@ module API
     end
 
     def quest(id)
-      @pivotal_project.stories.find(id)
+      API::PivotalQuest.new @pivotal_project.stories.find(id)
     end
 
   end
