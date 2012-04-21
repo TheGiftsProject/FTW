@@ -16,6 +16,14 @@ class Character < ActiveRecord::Base
     Character.needed_exp(self.level)
   end
 
+  def finished_quest(quest)
+    self.exp += 2**quest.estimation + 10
+    while self.exp > needed_exp
+      self.level += 1
+    end
+    save!
+  end
+
   private
 
   def init_char

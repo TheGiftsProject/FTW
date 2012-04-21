@@ -10,6 +10,6 @@ module CharacterHelper
     this_level_exp = character.exp - Character.needed_exp(character.level - 1)
     this_level_need = character.needed_exp - Character.needed_exp(character.level - 1)
     percent = this_level_exp* 100 / this_level_need
-    {:style => "width: #{percent}%"}
+    {:style => "width: #{percent}%", :data => {:exp => character.exp }}
   end
 end
