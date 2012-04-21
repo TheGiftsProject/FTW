@@ -77,18 +77,18 @@ TileRenderer.prototype.renderCoin = function(content_type) {
     this.coin_frame = this.coin_offset + this.renderer.accumulator;
     var tmp = Math.floor((this.coin_frame * 5) % 4);
     var animation = (tmp % 2) ? 0 : Math.floor(tmp/2)+1;
-    this.blit(this.renderer.coins, 16 * animation, 16 * content_type)
+    this.tileBlit(this.renderer.coins, 16 * animation, 16 * content_type)
 }
 
 TileRenderer.prototype.renderPowerup = function(content_type) {
     var tmp = Math.floor((this.renderer.accumulator*5) % 4);
     var animation = (tmp % 2) ? 0 : Math.floor(tmp/2)+1;
-    this.blit(this.renderer.coins, 16 * animation, 16 * content_type + 64)
+    this.tileBlit(this.renderer.coins, 16 * animation, 16 * content_type + 64)
 }
 TileRenderer.prototype.renderLife = function(content_type) {
     var tmp = Math.floor((this.renderer.accumulator*5) % 4);
     var animation = [0,1,2,1][tmp];
-    this.blit(this.renderer.coins, 16 * animation, 16 * content_type + 112)
+    this.tileBlit(this.renderer.coins, 16 * animation, 16 * content_type + 112)
 };
 
 TileRenderer.prototype.renderWall = function(){
@@ -97,52 +97,52 @@ TileRenderer.prototype.renderWall = function(){
     if (this.isPath(0,1))   idx += 2;
     if (this.isPath(1,0))   idx += 4;
     if (this.isPath(0,-1))  idx += 8;
-    this.blit(this.renderer.wall, 0 , idx * 16);
+    this.tileBlit(this.renderer.wall, 0 , idx * 16);
 
     if (this.fits([[0,1,2],
                    [1,2,2],
                    [2,2,2]])){
-        this.blit(this.renderer.wall, 0, 256 + 0 * 16);
+        this.tileBlit(this.renderer.wall, 0, 256 + 0 * 16);
     }
     if (this.fits([[2,1,0],
                    [2,2,1],
                    [2,2,2]])){
-        this.blit(this.renderer.wall, 0, 256 + 1 * 16);
+        this.tileBlit(this.renderer.wall, 0, 256 + 1 * 16);
     }
 
     if (this.fits([[2,2,2],
                    [2,2,1],
                    [2,1,0]])){
-        this.blit(this.renderer.wall, 0, 256 + 2 * 16);
+        this.tileBlit(this.renderer.wall, 0, 256 + 2 * 16);
     }
     if (this.fits([[2,2,2],
                    [1,2,2],
                    [0,1,2]])){
-        this.blit(this.renderer.wall, 0, 256 + 3 * 16);
+        this.tileBlit(this.renderer.wall, 0, 256 + 3 * 16);
     }
 
     if (this.wallDecal != null){
-        this.blit(this.renderer.wallBottom, 0,  this.wallDecal * 16);
+        this.tileBlit(this.renderer.wallBottom, 0,  this.wallDecal * 16);
     }
     if (this.roofDecal != null){
-        this.blit(this.renderer.roof, 0,  this.roofDecal * 16);
+        this.tileBlit(this.renderer.roof, 0,  this.roofDecal * 16);
     }
 
 };
 
 TileRenderer.prototype.renderRoad = function(){
     if (this.cell.broken) {
-        this.blit(this.renderer.road, this.brokenDecal*16, 48);
+        this.tileBlit(this.renderer.road, this.brokenDecal*16, 48);
         return;
     }
-    this.blit(this.renderer.road, 32, 0);
+    this.tileBlit(this.renderer.road, 32, 0);
     this.renderLines();
     this.renderStops();
     this.renderSewage();
     if (this.fits([[1,1,1],
                    [1,2,1],
                    [1,1,1]])){
-        this.blit(this.renderer.road, 32, 32);
+        this.tileBlit(this.renderer.road, 32, 32);
     }
 };
 
@@ -150,25 +150,25 @@ TileRenderer.prototype.renderStops = function(){
     if (this.fits([[2,0,0],
                    [2,2,1],
                    [2,0,2]])){
-        this.blit(this.renderer.road, 0, 32);
+        this.tileBlit(this.renderer.road, 0, 32);
         return;
     }
     if (this.fits([[2,0,2],
                    [1,2,2],
                    [0,0,2]])){
-        this.blit(this.renderer.road, 0, 16);
+        this.tileBlit(this.renderer.road, 0, 16);
         return;
     }
     if (this.fits([[2,2,2],
                    [0,2,0],
                    [2,1,0]])){
-        this.blit(this.renderer.road, 16, 16);
+        this.tileBlit(this.renderer.road, 16, 16);
         return;
     }
     if (this.fits([[0,1,2],
                    [0,2,0],
                    [2,2,2]])){
-        this.blit(this.renderer.road, 32, 16);
+        this.tileBlit(this.renderer.road, 32, 16);
         return;
     }
 };
@@ -177,7 +177,7 @@ TileRenderer.prototype.renderSewage = function(){
     if (this.fits([[0,2,0],
                    [2,2,2],
                    [0,2,0]])){
-        this.blit(this.renderer.road, 16, 32);
+        this.tileBlit(this.renderer.road, 16, 32);
         return;
     }
 };
@@ -190,7 +190,7 @@ TileRenderer.prototype.renderLines = function(){
         this.fits([[2,0,2],
                    [1,2,2],
                    [2,0,2]]))){
-        this.blit(this.renderer.road, 0, 0);
+        this.tileBlit(this.renderer.road, 0, 0);
         return;
     }
     if (this.col % 2 ==0 && (
@@ -200,7 +200,7 @@ TileRenderer.prototype.renderLines = function(){
         this.fits([[2,2,2],
                    [0,2,0],
                    [2,1,2]]))){
-        this.blit(this.renderer.road, 16, 0);
+        this.tileBlit(this.renderer.road, 16, 0);
         return;
     }
 };

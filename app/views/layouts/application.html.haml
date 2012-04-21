@@ -17,6 +17,10 @@
             .icon-bar
           %a.brand FTW
           %span An RPG/Project Management hybrid.<br> Quest through tasks, kill the bugs, get loot - woot.
+          - if @current_character.present?
+            %p.navbar-text.pull-right
+              Logged in as
+              %a= link_to @current_character.name, dashboard_path
     .container
       - flash.each do |key,val|
         .flash{:class => key}
