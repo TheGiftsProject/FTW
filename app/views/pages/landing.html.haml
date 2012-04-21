@@ -1,1 +1,13 @@
-This is the landing page
+.login
+  != form_tag session_path, :method => :post do
+    Login to View
+    %span (with your Pivotal Account)
+
+    .fields
+      != label_tag :name
+      != text_field_tag :name
+      %br
+      != label_tag :password
+      != password_field_tag :password
+
+    %button Login
