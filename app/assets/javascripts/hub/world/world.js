@@ -1,6 +1,6 @@
 function World(width, height) {
 
-    char = new Character(this, 96, 96);
+    char = new Character(this, 96, 240);
     station = new Station(this, 480, 48);
 
     this.characters = [char];

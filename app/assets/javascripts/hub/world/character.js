@@ -5,7 +5,7 @@ function Character(world, x, y) {
     this.lastDir = Direction.BOT;
     this.world = world;
     this.orders = [];
-    this.working = false;
+    this.workingAt = null;
 };
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
@@ -17,7 +17,7 @@ Character.prototype.update = function(dt) {
 };
 
 Character.prototype.isAvailable = function() {
-    return !this.working;
+    return this.workingAt === null;;
 };
 
 Character.prototype.isMoving = function() {
@@ -30,6 +30,13 @@ Character.prototype.goWork = function() {
     this.orders.push(new Order(Order.WORK_ORDER, emptyStation.x, emptyStation.y, emptyStation));
 }
 
+Character.prototype.stopWorking = function() {
+    if (this.workingAt != null) {
+        this.orders.push(new Order(Order.STOP_ORDER));
+        this.orders.push(new Order(Order.MOVE_ORDER, this.workingAt.x, this.workingAt.y + 48));
+    }
+}
+
 //========================== ORDERS =============================/
 function Order(type, destX, destY, destObject) {
     this.type = type;
@@ -40,11 +47,13 @@ function Order(type, destX, destY, destObject) {
 
 Order.MOVE_ORDER = 'move';
 Order.WORK_ORDER = 'work';
+Order.STOP_ORDER = 'stop';
 
 Order.prototype.perform = function(character) {
     switch (this.type) {
         case Order.MOVE_ORDER: this.performMoveOrder(character); break;
         case Order.WORK_ORDER: this.performWorkOrder(character); break;
+        case Order.STOP_ORDER: this.performStopOrder(character); break;
     }
 };
 
@@ -81,8 +90,13 @@ Order.prototype.performMoveOrder = function(character) {
 };
 
 Order.prototype.performWorkOrder = function(character) {
-    character.working = true;
+    character.workingAt = this.destObject;
     this.destObject.occupy(character);
+};
+
+Order.prototype.performStopOrder = function(character) {
+    this.destObject.unoccupy();
+    character.workingAt = null;
 }
 
 //========================== DIRECTION =============================/
