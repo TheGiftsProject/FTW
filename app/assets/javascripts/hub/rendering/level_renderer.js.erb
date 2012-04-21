@@ -1,0 +1,22 @@
+function LevelRenderer(ctx, width, height) {
+    this.sprite = new Image();
+    this.sprite.src = "<%= asset_path('devquest-sprite.png') %>"
+    this.accumulator = 0;
+    this.ctx = ctx;
+    this.cols = width / LevelRenderer.TILE_SIZE;
+    this.rows = height / LevelRenderer.TILE_SIZE;
+    this.roomRenderer = new RoomRenderer(this);
+}
+
+LevelRenderer.TILE_SIZE = 48;
+
+LevelRenderer.prototype.render = function(dt) {
+    this.accumulator += dt;
+    this.ctx.strokeStyle = "#000000";
+    this.roomRenderer.render();
+};
+
+LevelRenderer.prototype.blit = function(srcCol, srcRow, col, row){
+    var size = LevelRenderer.TILE_SIZE;
+    this.ctx.drawImage(this.sprite, srcCol * size, srcRow * size, size, size, col * size, row * size, size, size);
+};

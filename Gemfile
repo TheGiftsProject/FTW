@@ -10,11 +10,13 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
   gem 'bootstrap-sass', '~> 2.0.2'
+  gem 'quiet_assets'
 end
 
 gem 'jquery-rails'
 gem 'pivotal-tracker'
 gem 'ruby-debug19', :require => 'ruby-debug'
+gem "enumify"
 
 group :development, :test do
   gem 'rspec-rails'

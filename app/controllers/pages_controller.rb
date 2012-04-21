@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   end
 
   def dashboard
+    redirect_to new_character_path unless has_character?
 
 
   end
