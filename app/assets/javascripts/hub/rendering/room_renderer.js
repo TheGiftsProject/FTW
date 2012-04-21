@@ -1,4 +1,4 @@
-function RoomRenderer(renderer) {
+function RoomRenderer(renderer, world) {
     this.renderer = renderer;
 };
 
