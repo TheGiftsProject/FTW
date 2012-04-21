@@ -1,2 +1,16 @@
+- quests = ["A", "B", "C", "D"] #character.quests
+
 .quest_log
-  No Quests
+  - if quests.blank?
+    %h2 No Quests
+  - else
+    %h2 Quest List
+    %ul.nav.nav-tabs.nav-stacked
+      - quests.each do |quest|
+        %li
+          %a
+            %i.icon-flag
+            = quest
+            .btn.btn-success.btn-mini.pull-right
+              %i.icon-check
+              Done
