@@ -16,7 +16,6 @@ module API
     end
 
     def campaign(id)
-      # wrap pivotal project in a campaign object
       project = PivotalTracker::Project.find(id)
       API::PivotalCampaign.new project
     end
