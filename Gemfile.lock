@@ -76,6 +76,8 @@ GEM
       rest-client (~> 1.6.0)
       rest-client (~> 1.6.0)
     polyglot (0.3.3)
+    quiet_assets (1.0.0)
+      rails (~> 3.1)
     rack (1.4.1)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -156,6 +158,7 @@ DEPENDENCIES
   jquery-rails
   mysql2
   pivotal-tracker
+  quiet_assets
   rails (= 3.2.3)
   rspec-rails
   ruby-debug19
