@@ -3,4 +3,5 @@
 //= require underscore
 //= require bootstrap
 //= require request_frame
-//= require_tree .
+//= require hub
+//= require_directory .

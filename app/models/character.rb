@@ -44,8 +44,8 @@ class Character < ActiveRecord::Base
   end
 
   def quests
-    API::Pivotal.new(token).campaign(project_id).quests.accept do |quest|
-      ["started", "unscheduled"].include? quest.status
+    API::Pivotal.new(token).campaign(project_id).quests.reject do |quest|
+      not ["started", "unscheduled"].include? quest.state
     end
   end
 
