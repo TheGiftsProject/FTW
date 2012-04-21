@@ -4,7 +4,7 @@ function Hub(canvas, targetFPS) {
     this.ctxHeight = canvas.height;
     this.targetInterval = Math.floor(1000 / targetFPS);
     this.world = new World(this.ctxWidth, this.ctxHeight);
-    this.levelRenderer = new LevelRenderer(this.ctx, this.world);
+    this.renderer = new Renderer(this.ctx, this.world);
 }
 
 Hub.prototype.startLoop = function() {
@@ -29,7 +29,7 @@ Hub.prototype.loop = function() {
         updated = true;
     }
     if (updated) {
-        this.levelRenderer.render(this.renderAccumulator);
+        this.renderer.render(this.renderAccumulator);
         this.renderAccumulator = 0;
     }
     window.requestAnimFrame(_.bind(this.loop, this));

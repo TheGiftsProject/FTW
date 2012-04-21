@@ -1,6 +1,8 @@
 function Character(world, x, y) {
     this.x = x || 0;
     this.y = y || 0;
+    this.velX = 0;
+    this.velY = 0;
     this.world = world;
     this.orders = [];
 };
@@ -12,7 +14,7 @@ Character.prototype.update = function(dt) {
 };
 
 Character.prototype.isMoving = function() {
-    return this.orders.length > 0 && this.orders[0].isMoveOrder();
+    return this.velX != 0 || this.velY != 0;
 };
 
 //========================== ORDERS =============================/

@@ -1,18 +1,18 @@
-function LevelRenderer(ctx, world) {
+function Renderer(ctx, world) {
     this.sprite = new Image();
     this.sprite.src = "<%= asset_path('devquest-sprite.png') %>"
     this.accumulator = 0;
     this.ctx = ctx;
     this.world = world;
-    this.cols = world.width / LevelRenderer.TILE_SIZE;
-    this.rows = world.height / LevelRenderer.TILE_SIZE;
+    this.cols = world.width / Renderer.TILE_SIZE;
+    this.rows = world.height / Renderer.TILE_SIZE;
     this.roomRenderer = new RoomRenderer(this);
     this.characterRenderer = new CharacterRenderer(this, world);
 }
 
-LevelRenderer.TILE_SIZE = 48;
+Renderer.TILE_SIZE = 48;
 
-LevelRenderer.prototype.render = function(dt) {
+Renderer.prototype.render = function(dt) {
 
     this.ctx.clearRect(0, 0, this.world.width, this.world.height);
     this.ctx.save();
@@ -22,7 +22,12 @@ LevelRenderer.prototype.render = function(dt) {
     this.ctx.restore();
 };
 
-LevelRenderer.prototype.tileBlit = function(srcCol, srcRow, col, row){
-    var size = LevelRenderer.TILE_SIZE;
+Renderer.prototype.pixelBlit = function(srcCol, srcRow, x, y){
+    var size = Renderer.TILE_SIZE;
+    this.ctx.drawImage(this.sprite, srcCol * size, srcRow * size, size, size, x, y, size, size);
+};
+
+Renderer.prototype.tileBlit = function(srcCol, srcRow, col, row){
+    var size = Renderer.TILE_SIZE;
     this.ctx.drawImage(this.sprite, srcCol * size, srcRow * size, size, size, col * size, row * size, size, size);
 };

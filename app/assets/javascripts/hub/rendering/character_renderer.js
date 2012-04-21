@@ -9,5 +9,5 @@ CharacterRenderer.prototype.render = function() {
 };
 
 CharacterRenderer.prototype.renderCharacter = function(character) {
-
+    this.renderer.pixelBlit(0, 0, character.x, character.y);
 };
