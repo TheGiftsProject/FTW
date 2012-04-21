@@ -8,6 +8,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :load_character
 
+  def self.authenticate(options = {})
+    before_filter options do
+      |controller| controller.authenticate_user(options)
+    end
+  end
+
+
   def load_character
     @current_character = nil
 
