@@ -8,8 +8,6 @@ function World(width, height) {
     this.stations = [station];
     this.width = width;
     this.height = height;
-
-//    char.goToBulletin();
 }
 
 World.prototype.update = function(dt) {

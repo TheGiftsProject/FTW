@@ -13,6 +13,7 @@ function Character(world, x, y) {
 Character.STATE_IDLE    = 'idle';
 Character.STATE_WORKING = 'work';
 Character.STATE_DANCING = 'dance';
+Character.STATE_MOVING  = 'move';
 
 Character.SPEED = 2; // MUST be a divisor of TILE_SIZE (48).
 
@@ -27,7 +28,11 @@ Character.prototype.isAvailable = function() {
 };
 
 Character.prototype.isMoving = function() {
-    return this.vel != Direction.NONE;
+    return this.state === Character.STATE_MOVING;
+};
+
+Character.prototype.isDancing = function() {
+    return this.state === Character.STATE_DANCING;
 };
 
 Character.prototype.completeOrder = function() {
@@ -86,6 +91,7 @@ Order.prototype.performMoveOrder = function(character) {
     var verDist = this.destY - character.y;
 
     if (horDist != 0 ) {
+        character.state = Character.STATE_MOVING;
         if (horDist > 0) {
             character.vel = Direction.RIGHT;
             character.x += Character.SPEED;
@@ -96,6 +102,7 @@ Order.prototype.performMoveOrder = function(character) {
         }
     }
     else if (verDist != 0) {
+        character.state = Character.STATE_MOVING;
         if (verDist > 0) {
             character.vel = Direction.BOTTOM;
             character.y += Character.SPEED;
