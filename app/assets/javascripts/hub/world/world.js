@@ -1,14 +1,16 @@
 function World(width, height) {
 
-    char = new Character(this, 96, 240);
+    char = new Character(this, 144, 240);
     station = new Station(this, 480, 48);
 
+    this.bulletin = new Bulletin(this, 96, 96);
     this.characters = [char];
     this.stations = [station];
     this.width = width;
     this.height = height;
 
     char.goWork();
+    char.stopWorking();
 }
 
 World.prototype.update = function(dt) {

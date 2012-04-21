@@ -7,9 +7,6 @@ module CharacterHelper
   end
 
   def exp_bar_attr(character)
-    this_level_exp = character.exp - Character.needed_exp(character.level - 1)
-    this_level_need = character.needed_exp - Character.needed_exp(character.level - 1)
-    percent = this_level_exp* 100 / this_level_need
-    {:style => "width: #{percent}%", :data => {:exp => character.exp }}
+    {:style => "width: #{character.exp_percent}%", :data => {:exp => character.exp }}
   end
 end

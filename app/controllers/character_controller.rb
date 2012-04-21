@@ -2,7 +2,7 @@ class CharacterController < ApplicationController
 
   authenticate
 
-  before_filter :load_character, :only => [:show]
+  before_filter :load_character, :only => [:show, :start_quest, :finish_quest]
 
   def new
     @campaigns = API::Pivotal.new(current_user).campaigns
@@ -21,6 +21,15 @@ class CharacterController < ApplicationController
 
   def show
 
+  end
+
+  def start_quest
+    @character.start_quest(params[:quest_id])
+  end
+
+  def finish_quest
+    @character.finish_quest(params[:quest_id])
+    render :javascript => {:level => @character.level, :exp_percent => @character.exp_percent}
   end
 
   private

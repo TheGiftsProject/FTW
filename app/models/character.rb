@@ -16,7 +16,15 @@ class Character < ActiveRecord::Base
     Character.needed_exp(self.level)
   end
 
-  def finished_quest(quest)
+  def start_quest(quest_id)
+    quest = API::Pivotal.new(token).campaign(project_id).quest(quest_id)
+    quest.start!
+  end
+
+  def finish_quest(quest_id)
+    quest = API::Pivotal.new(token).campaign(project_id).quest(quest_id)
+    quest.finish!
+
     if quest.estimation.nil? or quest.estimation < 0
       self.exp += 15
     else
@@ -27,6 +35,12 @@ class Character < ActiveRecord::Base
       self.level += 1
     end
     save!
+  end
+
+  def exp_percent
+    this_level_exp = exp - Character.needed_exp(level - 1)
+    this_level_need = needed_exp - Character.needed_exp(level - 1)
+    percent = this_level_exp * 100 / this_level_need
   end
 
   def quests
