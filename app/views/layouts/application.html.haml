@@ -9,5 +9,8 @@
     != csrf_meta_tag
   %body
     %h1 FTW
-    %h2 A gameifiend project manager. Quest your task, kill the bugs, get loot - woot.
+    %h2 An RPG/Project Management hybrid.<br> Quest through tasks, kill the bugs, get loot - woot.
+    - flash.each do |key,val|
+      .flash{:class => key}
+        != val
     != yield
