@@ -13,6 +13,8 @@ RoomRenderer.prototype.render = function() {
     this.renderRightWall();
     this.renderFloor();
     this.renderDoor();
+    this.renderLeftTorches();
+    this.renderRightTorches();
 };
 
 // corners.
@@ -35,7 +37,7 @@ RoomRenderer.prototype.renderBottomRightCorner = function() {
 // walls.
 RoomRenderer.prototype.renderTopWall = function() {
     for (var col = 1; col < this.renderer.cols - 1; col++) {
-        this.renderer.blit(5, 0, col, 0);
+        this.renderer.blit(5, 0, col, 0, true);
     }
 };
 
@@ -68,4 +70,16 @@ RoomRenderer.prototype.renderFloor = function() {
 
 RoomRenderer.prototype.renderDoor = function() {
     this.renderer.blit(5, 3, Math.floor(this.renderer.cols / 2), this.renderer.rows - 1);
+};
+
+RoomRenderer.prototype.renderLeftTorches = function() {
+    for (var row = 1; row < this.renderer.rows - 1; row++) {
+        if (row % 2 == 0) this.renderer.blit(4, 3, 0, row);
+    }
+};
+
+RoomRenderer.prototype.renderRightTorches = function() {
+    for (var row = 1; row < this.renderer.rows - 1; row++) {
+        if (row % 2 == 0) this.renderer.blit(4, 4, this.renderer.cols - 1, row);
+    }
 };
