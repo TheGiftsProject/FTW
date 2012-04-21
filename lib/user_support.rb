@@ -32,7 +32,7 @@ module UserSupport
 
       return options[:token]
     else
-      return PivotalTracker::Client.token(options[:user], options[:pass])
+      return PivotalTracker::Client.token(options[:name], options[:password])
     end
   rescue RestClient::Unauthorized
     nil
