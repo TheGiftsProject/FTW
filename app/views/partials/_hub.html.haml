@@ -1,3 +1,6 @@
 .hub
   %canvas{:id => 'canvas', :width => 720, :height => 480}
 = javascript_include_tag 'hub'
+:javascript
+  var hub = new Hub(document.getElementById('canvas'), 60);
+  hub.startLoop();

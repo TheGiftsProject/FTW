@@ -58,6 +58,3 @@ Hub.prototype.render = function(dt) {
 //    }
     this.ctx.restore();
 };
-
-var hub = new Hub(document.getElementById('canvas'), 60);
-hub.startLoop();
