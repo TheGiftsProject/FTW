@@ -16,8 +16,6 @@ class Character < ActiveRecord::Base
     Character.needed_exp(self.level)
   end
 
-
-
   private
 
   def init_char
