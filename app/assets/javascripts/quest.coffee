@@ -23,6 +23,8 @@ class QuestLog
 
       if action == "start"
         element.find(".btn").removeClass("btn-warning").addClass("btn-success").text("Done")
+        element.data("action", "end")
+        element.data("url", url.replace("start","finish"))
       else
         element.fadeOut()
 

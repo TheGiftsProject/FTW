@@ -16,7 +16,7 @@ module API
     end
 
     def campaign(id)
-      project = PivotalTracker::Project.find(id)
+      project = PivotalTracker::Project.find(id.to_i)
       API::PivotalCampaign.new project
     end
 
