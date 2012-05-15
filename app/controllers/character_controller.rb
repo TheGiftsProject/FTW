@@ -12,7 +12,7 @@ class CharacterController < ApplicationController
     character = Character.new(params[:character])
     if character.valid?
       character.save!
-      redirect_to character_path(character)
+      redirect_to dashboard_path
     else
       flash[:error] = character.errors.inspect
       redirect_to new_character_path

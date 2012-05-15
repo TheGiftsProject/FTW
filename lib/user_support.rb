@@ -33,8 +33,8 @@ module UserSupport
   end
 
   def login(options = {})
-    if options[:user].present?
-      return PivotalTracker::Client.token(options[:user], options[:password])
+    if options[:name].present?
+      return PivotalTracker::Client.token(options[:name], options[:password])
 
     else
       PivotalTracker::Client.token = options[:token]
